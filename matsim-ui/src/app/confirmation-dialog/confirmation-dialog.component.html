@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>
+    <mat-icon *ngIf="data.type" [ngClass]="data.type">{{ getIcon(data.type) }}</mat-icon>
+    {{ data.title }}
+</h1>
+<div mat-dialog-content>
+    <p>{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()" *ngIf="data.type != 'error'">Cancel</button>
+    <button mat-button color="primary" (click)="onConfirm()" *ngIf="data.type != 'error'">Confirm</button>
+    <button mat-button color="primary" (click)="onCancel()" *ngIf="data.type == 'error'">OK</button>
+</div>

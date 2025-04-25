@@ -1,0 +1,91 @@
+<div class="root">
+    <mat-toolbar color="primary">
+        <span>MATSim Network</span>
+        <span class="example-spacer"></span>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Select an option from the menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="boundMatsim()" matTooltip="Use bounded area to create new MATSim network">
+                <mat-icon>map</mat-icon>
+                <span>Build MATSim Network</span>
+            </button>
+            <button mat-menu-item (click)="fileNetwork.click()" matTooltip="Use existing MATSim network file">
+                <input type="file" #fileNetwork hidden (change)="onNetworkSelected($event)"/>
+                <mat-icon>upload_file</mat-icon>
+                <span>Upload MATSim Network</span>
+            </button>
+            <button mat-menu-item (click)="randomRoutes()" matTooltip="">
+                <mat-icon>map</mat-icon>
+                <span>Random Routes</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar>
+
+    <div class="dashboard">
+        <div class="map-container"
+             leaflet
+             [leafletOptions]="options"
+             [(leafletCenter)]="center"
+             [(leafletZoom)]="zoom"
+             [leafletLayers]="caseLayers"
+             [leafletFitBounds]="bounds"
+        >
+        </div>
+
+        <div class="side-panel">
+
+            <div class="file-upload">
+                <span *ngIf="networkFile">{{ networkFile ? networkFile.name : '' }}</span>
+            </div>
+
+            <div class="file-upload">
+                <input type="file" #filePlan hidden (change)="onPlanSelected($event)"/>
+                <button mat-fab extended (click)="filePlan.click()" color="primary"
+                    matTooltip="Select MATSim plans file">
+                    <mat-icon matPrefix>upload_file</mat-icon>
+                    Plan file
+                </button>
+                <span *ngIf="planFile">{{ planFile ? planFile.name : '' }}</span>
+            </div>
+
+            <div class="file-upload">
+                <input type="file" #fileEvents hidden (change)="onEventsSelected($event)"/>
+                <button mat-fab extended (click)="fileEvents.click()" color="primary"
+                        matTooltip="Select MATSim events file">
+                    <mat-icon matPrefix>upload_file</mat-icon>
+                    Events file
+                </button>
+                <span *ngIf="eventsFile">{{ eventsFile ? eventsFile.name : '' }}</span>
+            </div>
+
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                <mat-button-toggle value="capacity" (click)="showCapacity()" matTooltip="Show street capacity information">
+                    Capacity
+                </mat-button-toggle>
+                <mat-button-toggle value="nodes" (click)="showNodes()" matTooltip="Show nodes in the network">Nodes</mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <mat-checkbox class="example-margin" [(ngModel)]="checked" (change)="showMap($event)">Hidden map</mat-checkbox>
+
+            <button mat-fab extended (click)="downloadPlans()">
+                <mat-icon>download_file</mat-icon>
+                Get plans
+            </button>
+            <button mat-fab extended (click)="emulate()">
+                <mat-icon>laps</mat-icon>
+                Emulation
+            </button>
+
+            <mat-form-field class="example-full-width">
+                <span matTextPrefix>x &nbsp;</span>
+                <input matInput placeholder="Speed" [(ngModel)]="speed">
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+
+
+
+

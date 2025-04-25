@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Generate Random Routes</h1>
+
+<div mat-dialog-content>
+    <p>You're going to generate random population in the MATSim model. Specify the number of population:</p>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Population size" [(ngModel)]="population">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button color="primary" (click)="onConfirm()">Confirm</button>
+</div>

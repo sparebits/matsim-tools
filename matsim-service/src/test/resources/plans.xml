@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<!DOCTYPE plans SYSTEM "http://www.matsim.org/files/dtd/plans_v4.dtd">
+<plans xml:lang="en-GB">
+    <person id="1">
+        <plan>
+            <act type="home" x="25.955423"/>
+        </plan>
+    </person>
+</plans>

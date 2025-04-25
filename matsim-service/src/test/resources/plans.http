@@ -1,0 +1,43 @@
+### Upload network file
+POST http://localhost:8080/network
+Content-Type: multipart/form-data; boundary=boundary123
+
+--boundary123
+Content-Disposition: form-data; name="network"; filename="network.xml"
+Content-Type: text/plain
+
+< ../../../../matsim-sample/src/test/resources/network.xml
+--boundary123
+
+
+### Send plan from/to points
+POST http://localhost:8080/plan
+Content-Type: application/json
+
+{
+  "from": {
+    "id": 1301864454,
+    "x": 2892400.3586855326,
+    "y": 5441919.013636387
+  },
+  "to": {
+    "id": 1410227850,
+    "x": 2893372.945944644,
+    "y": 5443448.107296475
+  }
+}
+
+
+### Download population
+GET http://localhost:8080/plan
+Accept: application/xml
+
+
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### Random plans stream
+GET http://localhost:8080/plan/random-sse?number=10
+
+###
